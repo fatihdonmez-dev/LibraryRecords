@@ -1,12 +1,25 @@
+using LibraryRecords.Filters;
 using LibraryRecords.Models.Data;
 using LibraryRecords.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-builder.Services.AddControllersWithViews();
+
+builder.Services.AddControllersWithViews(options =>
+{
+    options.Filters.Add(new GlobalExceptionFilter(
+        builder.Services.BuildServiceProvider().GetService<ILogger<GlobalExceptionFilter>>()
+    ));
+});
+
+//// Add services to the container.
+//builder.Services.AddControllersWithViews(options =>
+//{
+    
+//});
 
 builder.Services.AddDbContext<LibraryDbContext>(options =>
         options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));

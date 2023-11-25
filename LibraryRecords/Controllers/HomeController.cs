@@ -134,7 +134,7 @@ namespace LibraryRecords.Controllers
             if (returnDate > lastTransaction.DueDate)
             {
                 TimeSpan timeSpan = returnDate.Subtract(lastTransaction.DueDate);
-                lastTransaction.LateFee = (int)timeSpan.TotalDays > 0 ? (int)timeSpan.TotalDays * 10 : 10;
+                lastTransaction.LateFee = (int)timeSpan.TotalDays > 0 ? (int)timeSpan.TotalDays * 5 : 5;
             }
 
             // Kitabı ödünç alındı olarak işaretle
