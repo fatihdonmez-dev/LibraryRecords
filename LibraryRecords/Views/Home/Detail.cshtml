@@ -1,0 +1,30 @@
+﻿@model Book
+
+<h1>Kitap Detayları</h1>
+
+<div>
+    <h4>@Model.Title</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">ISBN</dt>
+        <dd class="col-sm-10">@Model.ISBN</dd>
+
+        <dt class="col-sm-2">Yayın Yılı</dt>
+        <dd class="col-sm-10">@Model.Year</dd>
+
+        <dt class="col-sm-2">Fiyatı</dt>
+        <dd class="col-sm-10">@Model.Price</dd>
+
+        <dt class="col-sm-2">Durumu</dt>
+        <dd class="col-sm-10">
+            @if (Model.IsCheckedOut)
+            {
+                <span class="text-success">Teslim Edildi</span>
+            }
+            else
+            {
+                <span class="text-warning">Beklemede</span>
+            }
+        </dd>
+    </dl>
+</div>

@@ -1,0 +1,28 @@
+﻿@using LibraryRecords.Models.ViewModels;
+@model ChechInViewModel
+
+<h2>Kitap Teslim Etme</h2>
+
+<form asp-action="CheckIn" method="post">
+    <div class="form-group">
+        <label asp-for="BookId">Book ID</label>
+        <input asp-for="BookId" class="form-control" readonly />
+    </div>
+    <div class="form-group">
+        <label asp-for="Name">Name</label>
+        <input asp-for="Name" class="form-control" required readonly />
+    </div>
+    <div class="form-group">
+        <label asp-for="PhoneNumber">Phone Number</label>
+        <input asp-for="PhoneNumber" class="form-control" required readonly />
+    </div>
+    <div class="form-group">
+        <label asp-for="DueDate">Due Date</label>
+        <input asp-for="DueDate" class="form-control" readonly />
+    </div>
+    <div class="form-group">
+        <label asp-for="ReturnDate">Return Date</label>
+        <input asp-for="ReturnDate" class="form-control" required />
+    </div>
+    <button type="submit" class="btn btn-primary">Check In</button>
+</form>

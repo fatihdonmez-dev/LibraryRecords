@@ -1,0 +1,65 @@
+﻿@{
+    ViewData["Title"] = "Ana sayfa";
+}
+
+@model List<Book>
+
+<h1>Kitap Listesi</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Kitap Başlığı</th>
+            <th>ISBN</th>
+            <th>Yayın Yılı</th>
+            <th>Fiyatı</th>
+            <th>Teslim Durumu</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var book in Model)
+        {
+            <tr>
+                <td>@book.Title</td>
+                <td>@book.ISBN</td>
+                <td>@book.Year</td>
+                <td>@book.Price</td>
+                <td>
+                    @{
+                        var activeTransaction = false;
+                        var lastTransactionCount = 0;
+                        if (book.Transactions != null)
+                        {
+                            activeTransaction = book.Transactions.Any(t => t.IsCheckedOut == false);
+                            lastTransactionCount = book.Transactions.Count();
+                        }
+
+                        if (activeTransaction)
+                        {
+                            <text>Teslim Edilmedi</text>
+                        }
+                        else if (!activeTransaction && lastTransactionCount == 0)
+                        {
+                            <text>Henüz Kimse Almadı</text>
+                        }
+                        else
+                        {
+                            <text>Kitap boşta!</text>
+                        }
+                    }
+                </td>
+                <td>
+                    @if (!activeTransaction)
+                    {
+                        <a asp-action="CheckOut" asp-controller="Home" asp-route-id="@book.Id" class="btn btn-primary">Teslim Alma</a>
+                    }
+                    else
+                    {
+                        <a asp-action="CheckIn" asp-controller="Home" asp-route-id="@book.Id" class="btn btn-success">Teslim Etme</a>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
